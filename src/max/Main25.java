@@ -25,14 +25,20 @@ public class Main25 {
             }
             ListNode headtmp = p.next;
             p .next = pre;
+            headtmp.next = cur;
+            // headtmp.next = pre;
             p = headtmp;
         }
-        return dummy;
-
+        return dummy.next;
+        // ListNode dummy = head;
+        // while(dummy != null){
+        //     System.out.println(isEmptyNode(dummy , k));
+        //     dummy = dummy.next;
+        // }
+        // return null;
     }
-
     public boolean isEmptyNode(ListNode root , int k){
-        int num = 0;
+        int num = -1;
         while(root != null){
             num++;
             root = root.next;
