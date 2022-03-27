@@ -22,6 +22,7 @@ public class Main210 {
             map.add(new ArrayList());
         }
         Queue<Integer> queue = new LinkedList<>();
+        //入度
         int[] into = new int[numCourses];
         for(int i = 0 ;i < prerequisites.length ; i++ ){
             int a = prerequisites[i][0];
@@ -35,25 +36,30 @@ public class Main210 {
         //     }
         //     System.out.println();
         // }
-
+        // for(int l : into){
+        //     System.out.print((int)l+" ");
+        // }
         List<Integer> reslist = new ArrayList<>();
         for(int i = 0 ; i < into.length ;i++ ){
             if(into[i] == 0){
                 queue.add(i);
                 reslist.add(i);
-                // System.out.print(i+" ");
             }
         }
 
         while (!queue.isEmpty()){
             int x = queue.poll();
             for(Integer i : map.get(x) ){
-                queue.add(i);
                 if(--into[i] == 0){
-                    // System.out.print("1");
+                    queue.add(i);
                     reslist.add(i);
                 }
             }
+        }
+        //判断是否有环存在
+        if(reslist.size() != numCourses){
+            int[] res = new int[0];
+            return res;
         }
         int[] res = new int[reslist.size()];
         for(int i = 0 ; i < reslist.size() ; i++ ){
