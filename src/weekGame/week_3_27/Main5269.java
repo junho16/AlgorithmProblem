@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Main5269 {
     int k;
+
     LinkedList<LinkedList<Integer>> pilesLink;
     int res = 0;
     public int maxValueOfCoins(List<List<Integer>> piles, int kk) {
