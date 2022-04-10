@@ -37,6 +37,7 @@ public class Main5219 {
         long l = 0;
         long r = candies[candies.length - 1];
         while ( l < r ){
+
             long mid = (l + r + 1 ) >> 1;
             long sum = 0;
             for(int j = 0 ; j < candies.length ; j++){
@@ -47,6 +48,7 @@ public class Main5219 {
             }else{
                 r = mid - 1;
             }
+
         }
         if(l == r && l == 0)
             return 0;
