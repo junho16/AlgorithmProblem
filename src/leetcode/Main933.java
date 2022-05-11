@@ -1,0 +1,44 @@
+package leetcode;
+
+/**
+ * 933. 最近的请求次数
+ * 写一个 RecentCounter 类来计算特定时间范围内最近的请求。
+ *
+ * 请你实现 RecentCounter 类：
+ *
+ * RecentCounter() 初始化计数器，请求数为 0 。
+ * int ping(int t) 在时间 t 添加一个新请求，其中 t 表示以毫秒为单位的某个时间，并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
+ * 保证 每次对 ping 的调用都使用比之前更大的 t 值。
+ *
+ * @author Junho
+ * @date 2022/5/6 11:10
+ */
+public class Main933 {
+//    RecentCounter
+
+
+    public Main933() {
+
+    }
+
+    int idx = 0;
+    int[] num = new int[10005];
+
+    public int ping(int t) {
+        num[idx++] = t;
+        int l = 0;
+        int r = idx - 1;
+        while (l < r){
+            int mid = l + r >> 1;
+            //找第一个比t-3000大的
+            if(num[mid] >= t - 3000){
+                r = mid;
+            }else{
+                l = mid + 1;
+            }
+        }
+        System.out.println(l+" " + r);
+        return idx - l ;
+    }
+
+}
