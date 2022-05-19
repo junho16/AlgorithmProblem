@@ -3,6 +3,9 @@ package base;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * 给定一个长度为 N 的整数数列，输出每个数左边第一个比它小的数，如果不存在则输出 −1。
+ */
 public class Main_stack_1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
