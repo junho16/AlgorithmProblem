@@ -16,18 +16,21 @@ import java.util.Stack;
  */
 
 public class Main394 {
-    static int index = 0;
-    public String decodeString(String s) {
-        return dfs(s);
+
+
+    int index = 0;
+    String s;
+    public String decodeString(String ss) {
+        s = ss;
+        return dfs();
     }
-    String dfs(String s ){
+    String dfs(){
         String res = "";
         while (index < s.length() && s.charAt(index) != ']'){
             if((s.charAt(index) >= 'a' && s.charAt(index) <= 'z') || (s.charAt(index) >= 'A' && s.charAt(index) <= 'Z') ){
                 res += s.charAt(index);
                 index++;
-            }
-            if(s.charAt(index) >= '0' && s.charAt(index) <= '9'){
+            }else if(s.charAt(index) >= '0' && s.charAt(index) <= '9'){
                 //String num_tmp = s.charAt(u)+"";
                 String num_tmp = "";
                 int k = index;
@@ -36,7 +39,7 @@ public class Main394 {
                     k++;
                 }
                 index = k + 1;
-                String y = dfs(s);
+                String y = dfs();
                 for(int i = 0 ; i < Integer.parseInt(num_tmp) ; i++){
                     res += y;
                 }
@@ -44,5 +47,6 @@ public class Main394 {
             }
         }
         return res;
+
     }
 }
