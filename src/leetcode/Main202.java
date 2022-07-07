@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 202. 快乐数
  * 编写一个算法来判断一个数 n 是不是快乐数。
@@ -15,23 +18,43 @@ package leetcode;
  * @date 2022/5/29 19:46
  */
 public class Main202 {
-    public int getSum(int x){
-        int sum = 0 ;
-        String s = x + "";
-        for(int i = 0 ; i < s.length() ; i++){
-            sum += Math.pow(s.charAt(i) - '0'  , 2) ;
+    int getSum(int n){
+        int sum = 0;
+        String str = n + "";
+        for(int i = 0; i < str.length() ;i++){
+            sum += Math.pow((str.charAt(i) - '0') , 2);
         }
         return sum;
     }
     public boolean isHappy(int n) {
-        int slowNum = getSum(n);
-        int fastNum = getSum(n);
-        fastNum = getSum(n);
-        while (fastNum != slowNum){
-            slowNum = getSum(n);
-            fastNum = getSum(n);
-            fastNum = getSum(n);
+        int slow = getSum(n);
+        int fast = getSum(slow);
+        while(fast != slow){
+            slow = getSum(slow);
+            fast = getSum(fast);
+            fast = getSum(fast);
         }
-        return slowNum == 1;
+        return slow == 1;
     }
+
+
+//    public int getSum(int x){
+//        int sum = 0 ;
+//        String s = x + "";
+//        for(int i = 0 ; i < s.length() ; i++){
+//            sum += Math.pow(s.charAt(i) - '0'  , 2) ;
+//        }
+//        return sum;
+//    }
+//    public boolean isHappy(int n) {
+//        int slowNum = getSum(n);
+//        int fastNum = getSum(n);
+//        fastNum = getSum(n);
+//        while (fastNum != slowNum){
+//            slowNum = getSum(n);
+//            fastNum = getSum(n);
+//            fastNum = getSum(n);
+//        }
+//        return slowNum == 1;
+//    }
 }
