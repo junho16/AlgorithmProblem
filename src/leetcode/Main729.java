@@ -1,5 +1,8 @@
 package leetcode;
 
+import com.sun.media.sound.SoftTuning;
+
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.Comparator;
 import java.util.TreeSet;
 
@@ -20,57 +23,114 @@ import java.util.TreeSet;
  * @date 2022/6/6 22:42
  */
 public class Main729 {
+    public Main729() {
+
+    }
 
     class Node{
-        int start;
+        int start ;
         int end;
         public Node(int s , int e){
             this.start = s;
             this.end = e;
         }
     }
+    TreeSet<Node> treeSet = new TreeSet<>(new Comparator<Node>() {
+        @Override
+        public int compare(Node o1, Node o2) {
+            return o1.end - o2.end;
+        }
+    });
 
-    TreeSet<Node> treeSet;
+    public boolean book(int start, int end) {
+        if(treeSet.size() == 0 ){
+            treeSet.add(new Node(start, end));
+            return true;
+        }
 
-    public Main729() {
-        treeSet = new TreeSet(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return o1.start - o2.start;
-            }
-        });
-        treeSet.add(new Node((int) -1e9 , (int) -1e9));
-        treeSet.add(new Node((int) 1e9 , (int) 1e9));
+        // 在新node左边的第一个node
+        Node node1 = treeSet.floor(new Node(start , end));
+        Node node2 = treeSet.ceiling(new Node(start , end));
+        boolean L = true;
+        boolean R = true;
+        if(node1 != null && node1.end > start){
+            L = false;
+            // System.out.println("NDOE1 : " + node1.start + " " + node1.end);
+        }
+        if(node2 != null && node2.start < end){
+            R = false;
+            // System.out.println("NDOE2 : " + node2.start + " " + node2.end);
+        }
+        // System.out.println("===");
+        if(L && R){
+            treeSet.add(new Node(start, end));
+        }
+        return L && R ? true : false;
     }
 
-    boolean check(Node nodeNow , Node nodeCheck){
-        if((nodeNow.end <= nodeCheck.start ) ||
-                (nodeNow.start >= nodeCheck.end)
-        ){
-            //没有交集
-            return false;
-        }
-        return true;
-//        下面这个判别方式是错误的。。。虽然我也不知道哪里错了
-//        if((nodeNow.start < nodeCheck.start && nodeNow.end < nodeCheck.end) ||
-//                (nodeNow.start > nodeCheck.start && nodeNow.end > nodeCheck.end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    class Node{
+//        int start;
+//        int end;
+//        public Node(int s , int e){
+//            this.start = s;
+//            this.end = e;
+//        }
+//    }
+//
+//    TreeSet<Node> treeSet;
+//
+//    public Main729() {
+//        treeSet = new TreeSet(new Comparator<Node>() {
+//            @Override
+//            public int compare(Node o1, Node o2) {
+//                return o1.start - o2.start;
+//            }
+//        });
+//        treeSet.add(new Node((int) -1e9 , (int) -1e9));
+//        treeSet.add(new Node((int) 1e9 , (int) 1e9));
+//    }
+//
+//    boolean check(Node nodeNow , Node nodeCheck){
+//        if((nodeNow.end <= nodeCheck.start ) ||
+//                (nodeNow.start >= nodeCheck.end)
 //        ){
 //            //没有交集
 //            return false;
 //        }
 //        return true;
-    }
-
-    public boolean book(int start, int end) {
-        Node now = new Node(start , end);
-        Node leftNode = treeSet.floor(now);
-        Node rightNode = treeSet.ceiling(now);
-
-
-        if(check(now , leftNode) || check(now , rightNode)){
-            return false;
-        }
-        treeSet.add(now);
-        return true;
-    }
+////        下面这个判别方式是错误的。。。虽然我也不知道哪里错了
+////        if((nodeNow.start < nodeCheck.start && nodeNow.end < nodeCheck.end) ||
+////                (nodeNow.start > nodeCheck.start && nodeNow.end > nodeCheck.end)
+////        ){
+////            //没有交集
+////            return false;
+////        }
+////        return true;
+//    }
+//
+//    public boolean book(int start, int end) {
+//        Node now = new Node(start , end);
+//        Node leftNode = treeSet.floor(now);
+//        Node rightNode = treeSet.ceiling(now);
+//
+//
+//        if(check(now , leftNode) || check(now , rightNode)){
+//            return false;
+//        }
+//        treeSet.add(now);
+//        return true;
+//    }
 }
